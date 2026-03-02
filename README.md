@@ -1,23 +1,30 @@
-# 📦 E-commerce Customer Experience Analysis
+# 📦 E-commerce Delivery Delay Impact Analysis
 Power BI | Data Modeling | Customer Analytics | Operational Insights
 
 ## 📌 Project Overview
-This project analyzes how delivery delays impact customer satisfaction and business performance in an e-commerce environment.
+This project analyzes the operational impact of delivery delays on customer satisfaction using the Brazilian Olist e-commerce dataset.
+The objective was not just to build dashboards, but to quantify how delivery performance affects customer ratings and revenue risk.
 
-The goal was not just to build dashboards, but to answer real business questions:
-- Do late deliveries increase low review scores?
-- Which sellers and regions contribute most to delivery delays?
-- How much revenue is at risk due to operational inefficiencies?
-- What concrete actions could improve customer experience?
+## 🎯 Business Problem
+Does late delivery significantly increase the probability of low customer ratings?
 
-The project was built entirely in Power BI, using Power Query for data transformation and a proper star schema data model.
+If so:
+- Which sellers drive the highest operational risk?
+- Which regions show structural delay patterns?
+- How much revenue is associated with delayed deliveries?
+- What actions can reduce customer dissatisfaction?
 
-## 🎯 Business Questions
-- How strongly do delivery delays affect low review ratings?
-- Which sellers have the highest late delivery rate?
-- Which states/regions generate the most delayed orders?
-- What percentage of delivered revenue is associated with late deliveries?
-- What operational actions would have the highest business impact?
+## 📊 Key KPI Results
+| Metric                 | Value        |
+| ---------------------- | ------------ |
+| Total Orders           | 99,441       |
+| Late Orders            | 6,535 (6.6%) |
+| Low Rating % (On-Time) | 11.43%       |
+| Low Rating % (Late)    | 62.46%       |
+| Rating Gap             | +51.03 p.p.  |
+
+📌 Late delivery increases the probability of receiving a low rating by more than 5x.
+This confirms that delivery reliability is the strongest driver of negative customer feedback.
 
 ## 🗂 Dataset
 Source: Brazilian E-commerce Public Dataset (Olist)
@@ -36,7 +43,7 @@ The dataset includes:
 - Customer reviews (1–5 score)
 - Seller-level operational data
 
-## 🏗 Data Modeling
+## 🏗 Data Model
 A proper star schema was implemented:
 
 Fact Tables:
@@ -50,78 +57,67 @@ Dimension Tables:
 - dim_product
 - dim_date
 
-Power Query was used for:
-- Data cleaning
-- Date transformation
-- Calculating delivery delay metrics
-- Creating operational flags (Late / On-Time)
+Power Query ransformations:
+- Delivery delay calculation
+- Late / On-Time flag creation
+- Date normalization
+- Revenue calculations
 
-## 📊 Key KPIs
-- Total Orders
-- Delivered Orders
-- Late Delivery %
-- Average Delivery Days
-- Average Review Score
-- Low Rating %
-- GMV (Delivered)
-- GMV at Risk (Late Deliveries)
-- Rating Gap (Late vs On-Time)
+## 📷 Star Schema Model
+![Data Model](Docs/model_view.png)
 
-## 🔎 Core Insights
-### 1️⃣ Late deliveries significantly increase low ratings
-Low rating percentage is substantially higher for late deliveries compared to on-time deliveries.
-Business Impact: Delivery reliability directly affects customer satisfaction.
+## 📊 Dashboard Overview
+### 1️⃣ Executive Overview
+High-level KPIs showing operational performance and rating impact.
+![Executive page](Docs/overview.png)
 
-### 2️⃣ A small number of sellers drive most delays
-Top sellers with high order volume and high late rate create disproportionate operational risk.
-Action: Implement seller-level SLA monitoring and performance scoring.
+### 2️⃣ Delay → Rating Impact
+Visual comparison between On-Time vs Late low rating probability.
+![Delay page](Docs/delay_analysis.png)
 
-### 3️⃣ Revenue at Risk is measurable
-A significant share of delivered GMV is associated with late deliveries.
-Action: Improving logistics performance can directly protect revenue and brand perception.
+### 3️⃣ Seller & Region Risk Analysis
+Identification of high-risk sellers and geographic delay clusters.
+![Seller page](Docs/seller_analysis.png)
 
-### 4️⃣ Certain regions show structural delay patterns
-Some states consistently show higher late delivery percentages.
-Action: Investigate logistics partners and shipping routes in those regions.
-
-### 5️⃣ Delay severity correlates with rating drop
-The longer the delay bucket (4–7 days, 8–14 days, 15+), the higher the low rating percentage.
-Action: Prioritize severe delay prevention.
+### 4️⃣ Insights & Recommendations
+Business-focused operational actions derived from data.
+![Insights page](Docs/insights.png)
 
 ## 🧠 Analytical Techniques Used
 - Star schema modeling
-- DAX measures for KPI calculation
+- DAX context-based KPI calculations
 - Segmented analysis (Late vs On-Time)
-- Operational flag logic
-- Revenue impact analysis
-- Decomposition tree for driver analysis
-- Drillthrough seller analysis
+- Revenue at risk calculation
+- Delay severity bucket segmentation
+- Decomposition Tree for driver analysis
+- Drillthrough seller-level investigation
 
-## 📈 Dashboard Pages
-### 1️⃣ Executive Overview
-High-level operational KPIs and delivery impact metrics.
+## 🔎 Core Insights
+### 1️⃣ Late deliveries sdrive negative feedback
+Late deliveries increase low rating probability from 11.43% to 62.46%.
 
-### 2️⃣ Delay → Rating Analysis
-Correlation between delivery delay and review score.
+### 2️⃣ Operational risk is concentrated
+small number of sellers contribute disproportionately to delay volume.
 
-### 3️⃣ Seller & Region Risk Analysis
-Operational risk identification by geography and seller.
+### 3️⃣ Revenue at Risk is measurable
+elayed orders represent a significant share of delivered GMV.
 
-### 4️⃣ Insights & Recommended Actions
-Business-focused recommendations based on data findings.
+### 4️⃣ Structural regional patterns exist
+Certain states show consistently higher late delivery percentages.
+
+## 🚀 Business Recommendations
+- Introduce seller-level SLA monitoring.
+- Flag high-risk sellers using delay thresholds.
+- Improve logistics in high-delay regions.
+- Implement early delay detection alerts.
+- Use delay risk scoring to prevent rating drops.
 
 ## 🛠 Tools Used
 - Power BI
 - Power Query
 - DAX
-- Data modeling best practices
-
-## 🚀 Business Recommendations
-- Introduce seller-level SLA performance monitoring.
-- Penalize or flag consistently late sellers.
-- Optimize logistics routes in high-delay states.
-- Implement early delay detection alert system.
-- Use delay probability scoring to prevent customer dissatisfaction.
+- Star Schema Modeling
+- KPI & Driver Analysis
 
 ## 📎 Repository Structure
 ```
@@ -129,6 +125,7 @@ PowerBI/
     Ecommerce_Customer_Experience.pbix
 
 Docs/
+    model_view.png
     overview.png
     delay_analysis.png
     seller_analysis.png
@@ -141,10 +138,10 @@ README.md
 ```
 
 ## 💡 What This Project Demonstrates
-- [x] Ability to translate business problems into analytical questions
-- [x] Data modeling using star schema
+- [x] Business-first analytical thinking
+- [x] Proper star schema modeling
 - [x] Strong DAX KPI development
-- [x] Insight generation beyond visualizations
-- [x] Actionable business recommendations
+- [x] Operational impact quantification
+- [x] ctionable data-driven recommendations
 
 🔙 [Back to Portfolio](https://github.com/BlladeRunner)
